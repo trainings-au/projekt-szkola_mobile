@@ -14,6 +14,46 @@ class PageOne extends StatefulWidget {
   _PageOneState createState() => _PageOneState();
 }
 
+class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        TextButton(
+          child: Icon(
+            Icons.info_outline,
+            color: Colors.grey,
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PageInfo(),
+              ),
+            );
+          },
+        ),
+        SizedBox(width: 240),
+        TextButton(
+          child: Row(
+            children: [
+              Text("Polski"),
+              Icon(
+                CupertinoIcons.lab_flask,
+                color: Colors.indigo,
+              ),
+            ],
+          ),
+          onPressed: null,
+        ),
+      ],
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(150);
+}
+
 class _PageOneState extends State<PageOne> with SingleTickerProviderStateMixin {
   TabController _tabController;
 
@@ -31,183 +71,124 @@ class _PageOneState extends State<PageOne> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: TabBarView(
-        controller: _tabController,
-        children: <Widget>[
-          Container(
-            color: Color.fromARGB(7, 5, 5, 1),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    TextButton(
-                      child: Icon(
-                        Icons.info_outline,
-                        color: Colors.grey,
+    return SafeArea(
+      child: Scaffold(
+        appBar: MyAppBar(),
+        body: TabBarView(
+          controller: _tabController,
+          children: <Widget>[
+            Container(
+              color: Color.fromARGB(7, 5, 5, 1),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Expanded(
+                    child: Text(
+                      "Co zrobić ",
+                      style: TextStyle(
+                        color: Colors.indigo,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: "RobotoMono",
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PageInfo(),
-                          ),
-                        );
-                      },
+                      textAlign: TextAlign.center,
                     ),
-                    SizedBox(width: 240),
-                    TextButton(
-                      child: Row(
-                        children: [
-                          Text("Polski"),
-                          Icon(
-                            CupertinoIcons.lab_flask,
-                            color: Colors.indigo,
-                          ),
-                        ],
+                  ),
+                  Expanded(
+                    child: Text(
+                      "po przyjeździe",
+                      style: TextStyle(
+                        color: Colors.indigo,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: "RobotoMono",
                       ),
-                      onPressed: null,
+                      textAlign: TextAlign.center,
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: 12,
-                ),
-                Expanded(
-                  child: Text(
-                    "Co zrobić ",
-                    style: TextStyle(
-                      color: Colors.indigo,
-                      fontSize: 30,
-                      fontWeight: FontWeight.w900,
-                      fontFamily: "RobotoMono",
+                  ),
+                  Container(
+                    color: Color.fromARGB(4, 5, 6, 1),
+                    height: 600,
+                    child: ListView(
+                      children: [
+                        greybutton(Icons.badge, "Załatwić Kartę pobytu"),
+                        greybutton(Icons.hotel, "Szukać Hoteli"),
+                        greybutton(Icons.house, "Szukać Mieszkania"),
+                        greybutton(Icons.translate, "Tłumacz POL-RUS"),
+                        greybutton(Icons.room, "Podstawowe adresy w Poznaniu"),
+                        greybutton(Icons.fiber_pin, "Załatwić pesel"),
+                      ],
                     ),
-                    textAlign: TextAlign.center,
                   ),
-                ),
-                Expanded(
-                  child: Text(
-                    "po przyjeździe",
-                    style: TextStyle(
-                      color: Colors.indigo,
-                      fontSize: 30,
-                      fontWeight: FontWeight.w900,
-                      fontFamily: "RobotoMono",
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                Container(
-                  color: Color.fromARGB(4, 5, 6, 1),
-                  height: 600,
-                  child: ListView(
-                    children: [
-                      greybutton(Icons.badge, "Załatwić Kartę pobytu"),
-                      greybutton(Icons.hotel, "Szukać Hoteli"),
-                      greybutton(Icons.house, "Szukać Mieszkania"),
-                      greybutton(Icons.translate, "Tłumacz POL-RUS"),
-                      greybutton(Icons.room, "Podstawowe adresy w Poznaniu"),
-                      greybutton(Icons.fiber_pin, "Załatwić pesel"),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Container(
-            color: Color.fromARGB(7, 5, 5, 1),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    TextButton(
-                      child: Icon(
-                        Icons.info_outline,
-                        color: Colors.grey,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PageInfo(),
-                          ),
-                        );
-                      },
-                    ),
-                    SizedBox(width: 240),
-                    TextButton(
-                      child: Row(
-                        children: [
-                          Text("Polski"),
-                          Icon(
-                            CupertinoIcons.lab_flask,
-                            color: Colors.grey,
-                          ),
-                        ],
-                      ),
-                      onPressed: null,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Expanded(
-                  child: Text(
-                    "Pobyt w Polsce",
-                    style: TextStyle(
-                      color: Colors.indigo,
-                      fontSize: 30,
-                      fontWeight: FontWeight.w900,
-                      fontFamily: "RobotoMono",
-                    ),
-                    textAlign: TextAlign.center,
+            Container(
+              color: Color.fromARGB(7, 5, 5, 1),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 30,
                   ),
-                ),
-                Container(
-                  height: 600,
-                  color: Color.fromARGB(4, 5, 6, 1),
-                  child: ListView(
-                    children: [
-                      greybutton(Icons.directions_bus,
-                          "Rozkład jazdy autobusu i pociągu"),
-                      greybutton(
-                          Icons.account_balance, "Założyć konto bankowe"),
-                      greybutton(Icons.work, "Szukać Pracy"),
-                      greybutton(Icons.security, "Policja i Dzielnicowy"),
-                      greybutton(Icons.mail, "Adresy Poczty"),
-                      greybutton(Icons.engineering, "Służby Komunalne"),
-                      greybutton(
-                          Icons.restaurant_menu, "Jedzenie, Rozrywka, Kultura"),
-                    ],
+                  Expanded(
+                    child: Text(
+                      "Pobyt w Polsce",
+                      style: TextStyle(
+                        color: Colors.indigo,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: "RobotoMono",
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                ),
-              ],
+                  Container(
+                    height: 600,
+                    color: Color.fromARGB(4, 5, 6, 1),
+                    child: ListView(
+                      children: [
+                        greybutton(Icons.directions_bus,
+                            "Rozkład jazdy autobusu i pociągu"),
+                        greybutton(
+                            Icons.account_balance, "Założyć konto bankowe"),
+                        greybutton(Icons.work, "Szukać Pracy"),
+                        greybutton(Icons.security, "Policja i Dzielnicowy"),
+                        greybutton(Icons.mail, "Adresy Poczty"),
+                        greybutton(Icons.engineering, "Służby Komunalne"),
+                        greybutton(Icons.restaurant_menu,
+                            "Jedzenie, Rozrywka, Kultura"),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: TabBar(
-        controller: _tabController,
-        labelColor: Color.fromARGB(140, 1, 1, 1),
-        unselectedLabelColor: Color.fromARGB(140, 1, 1, 1),
-        indicatorColor: Color.fromARGB(140, 1, 1, 1),
-        indicator: UnderlineTabIndicator(
-          borderSide: BorderSide(width: 6.0),
-          insets: EdgeInsets.fromLTRB(0, 0.0, 0, 40.0),
+          ],
         ),
-        tabs: <Widget>[
-          Tab(
-            text: "PO PRZYJEŹDZIE",
+        bottomNavigationBar: TabBar(
+          controller: _tabController,
+          labelColor: Color.fromARGB(140, 1, 1, 1),
+          unselectedLabelColor: Color.fromARGB(140, 1, 1, 1),
+          indicatorColor: Color.fromARGB(140, 1, 1, 1),
+          indicator: UnderlineTabIndicator(
+            borderSide: BorderSide(width: 6.0),
+            insets: EdgeInsets.fromLTRB(0, 0.0, 0, 40.0),
           ),
-          Tab(
-            text: "POBYT W POLSCE",
-          ),
-        ],
+          tabs: <Widget>[
+            Tab(
+              text: "PO PRZYJEŹDZIE",
+            ),
+            Tab(
+              text: "POBYT W POLSCE",
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -279,84 +260,89 @@ class greybutton extends StatelessWidget {
 class PageInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(),
-        backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-            child: Container(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-              TextButton(
-                child: Icon(
-                  CupertinoIcons.arrow_left,
-                  color: Colors.grey,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PageOne(),
-                    ),
-                  );
-                },
-              ),
-              Container(
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: Colors.white,
+          body: SingleChildScrollView(
+              child: Container(
                   child: Column(
-                children: [
-                  Container(
-                    child: Column(
-                      children: <Widget>[
-                        imageload(30, 5000, 400,
-                            'https://lh3.googleusercontent.com/p/AF1QipOWRfLMw4YaogW9v0rOmX7bV38fdLreF-j8M7eZ=w600-k')
-                      ],
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                Row(
+                  children: [
+                    TextButton(
+                      child: Icon(
+                        CupertinoIcons.arrow_left,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PageOne(),
+                          ),
+                        );
+                      },
                     ),
-                  ),
-                  Container(
-                    width: 10000,
-                    margin: EdgeInsets.symmetric(vertical: 2, horizontal: 2),
-                    child: Text(
-                      "Nulla eget mollis ante. Meacenas pellentesque lorem at odio mollis, vitae mattis risus dictum. Suspendisse fringilla quam a suscipit auctor. Morbi vel dui ac lectus congue dapibus eget interdum arcu. Nunc purus odio, iaculis nec pellentesque ac, tristique nec lorem.\n ",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontFamily: "Calibri"),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                ],
-              )),
-              Container(
-                width: 10000,
-                margin: EdgeInsets.symmetric(vertical: 2, horizontal: 2),
-                child: Text(
-                  "International School of Poznan\n ",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontFamily: "Calibri"),
+                  ],
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Icon(Icons.location_on, size: 18),
-                  Text('Edmunda Taczanowskiego 18, 60-147 Poznań',
-                      style: TextStyle(fontSize: 14, color: Colors.black)),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Icon(Icons.phone, size: 18),
-                  Text('+48 61 646 37 60',
-                      style: TextStyle(fontSize: 14, color: Colors.black)),
-                ],
-              ),
-            ]))));
+                Container(
+                    child: Column(
+                  children: [
+                    Container(
+                      child: Column(
+                        children: <Widget>[
+                          imageload(30, 5000, 400,
+                              'https://lh3.googleusercontent.com/p/AF1QipOWRfLMw4YaogW9v0rOmX7bV38fdLreF-j8M7eZ=w600-k')
+                        ],
+                      ),
+                    ),
+                    Container(
+                      width: 10000,
+                      margin: EdgeInsets.symmetric(vertical: 2, horizontal: 2),
+                      child: Text(
+                        "Nulla eget mollis ante. Meacenas pellentesque lorem at odio mollis, vitae mattis risus dictum. Suspendisse fringilla quam a suscipit auctor. Morbi vel dui ac lectus congue dapibus eget interdum arcu. Nunc purus odio, iaculis nec pellentesque ac, tristique nec lorem.\n ",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontFamily: "Calibri"),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                  ],
+                )),
+                Container(
+                  width: 10000,
+                  margin: EdgeInsets.symmetric(vertical: 2, horizontal: 2),
+                  child: Text(
+                    "International School of Poznan\n ",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontFamily: "Calibri"),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Icon(Icons.location_on, size: 18),
+                    Text('Edmunda Taczanowskiego 18, 60-147 Poznań',
+                        style: TextStyle(fontSize: 14, color: Colors.black)),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Icon(Icons.phone, size: 18),
+                    Text('+48 61 646 37 60',
+                        style: TextStyle(fontSize: 14, color: Colors.black)),
+                  ],
+                ),
+              ])))),
+    );
   }
 }
 
