@@ -16,7 +16,7 @@ class PageIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var items = List<String>.generate(200000, (i) => "Item $i");
+    var items = List<String>.generate(3, (i) => "Item $i");
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -27,7 +27,7 @@ class PageIn extends StatelessWidget {
                 children: [
                   TextButton(
                     child: Icon(
-                      Icons.arrow_left,
+                      Icons.arrow_back_sharp,
                       color: Colors.grey,
                     ),
                     onPressed: () {
@@ -70,9 +70,11 @@ class PageIn extends StatelessWidget {
               ),
               Expanded(
                 child: ListView.builder(
+                  padding: EdgeInsets.only(top: 16),
                   itemCount: items.length,
                   itemBuilder: (context, index) {
                     return Container(
+                      padding: EdgeInsets.symmetric(vertical: 12),
                       color: Colors.white,
                       child: Column(
                         children: <Widget>[
@@ -96,6 +98,9 @@ class PageIn extends StatelessWidget {
                                     ),
                                   ],
                                 ),
+                                SizedBox(
+                                  height: 8,
+                                ),
                                 Row(
                                   children: [
                                     Icon(
@@ -110,6 +115,9 @@ class PageIn extends StatelessWidget {
                                       ),
                                     ),
                                   ],
+                                ),
+                                SizedBox(
+                                  height: 8,
                                 ),
                                 Row(
                                   children: [

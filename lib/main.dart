@@ -173,8 +173,9 @@ class _PageOneState extends State<PageOne> with SingleTickerProviderStateMixin {
           indicatorColor: Color.fromARGB(140, 1, 1, 1),
           indicator: UnderlineTabIndicator(
             borderSide: BorderSide(width: 4.0),
-            insets: EdgeInsets.fromLTRB(0, 0, 0, 42.0),
+            insets: EdgeInsets.fromLTRB(0, 0, 0, 52.0),
           ),
+          indicatorWeight: 9,
           tabs: <Widget>[
             Tab(
               text: "PO PRZYJEŹDZIE",
