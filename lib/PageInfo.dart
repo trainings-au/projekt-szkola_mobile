@@ -15,7 +15,7 @@ class PageInfo extends StatelessWidget {
                 children: [
                   TextButton(
                     child: Icon(
-                      Icons.arrow_left,
+                      Icons.arrow_back_sharp,
                       color: Colors.grey,
                     ),
                     onPressed: () {
