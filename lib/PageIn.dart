@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import 'forMap.dart';
 import 'main.dart';
 
 void main() {
@@ -90,12 +92,12 @@ class PageIn extends StatelessWidget {
                                       color: Color.fromARGB(140, 1, 1, 1),
                                     ),
                                     SizedBox(width: 8),
-                                    Text(
-                                      'Janowicka 8',
-                                      style: TextStyle(
-                                        color: Color.fromARGB(140, 1, 1, 1),
-                                      ),
-                                    ),
+                                    InkWell(
+                                        onTap: () {
+                                          MapUtils.openMap(
+                                              52.2324353, 17.2524207);
+                                        },
+                                        child: new Text("Janowicka 8")),
                                   ],
                                 ),
                                 SizedBox(
@@ -108,17 +110,13 @@ class PageIn extends StatelessWidget {
                                       color: Color.fromARGB(140, 1, 1, 1),
                                     ),
                                     SizedBox(width: 8),
-                                    Text(
-                                      '+48 61 886 56 07',
-                                      style: TextStyle(
-                                        color: Color.fromARGB(140, 1, 1, 1),
-                                      ),
-                                    ),
+                                    InkWell(
+                                        onTap: () =>
+                                            launch("tel://+48 61 886 56 07"),
+                                        child: new Text("+48 61 886 56 07")),
                                   ],
                                 ),
-                                SizedBox(
-                                  height: 8,
-                                ),
+                                SizedBox(height: 8),
                                 Row(
                                   children: [
                                     Icon(
@@ -126,14 +124,13 @@ class PageIn extends StatelessWidget {
                                       color: Color.fromARGB(140, 1, 1, 1),
                                     ),
                                     SizedBox(width: 8),
-                                    Text(
-                                      'placowki_poczta-polska.pl',
-                                      style: TextStyle(
-                                        color: Color.fromARGB(140, 1, 1, 1),
-                                      ),
+                                    InkWell(
+                                      child: Text('placowki_poczta-polska.pl'),
+                                      onTap: () => launch(
+                                          'https://www.poczta-polska.pl'),
                                     ),
                                   ],
-                                )
+                                ),
                               ],
                             ),
                           )

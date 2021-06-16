@@ -51,10 +51,10 @@ class PageInfo extends StatelessWidget {
                               margin: EdgeInsets.symmetric(
                                   vertical: 2, horizontal: 2),
                               child: Text(
-                                "Nulla eget mollis ante. Meacenas pellentesque lorem at odio mollis, vitae mattis risus dictum. Suspendisse fringilla quam a suscipit auctor. Morbi vel dui ac lectus congue dapibus eget interdum arcu. Nunc purus odio, iaculis nec pellentesque ac, tristique nec lorem.\n ",
+                                "Programiści pierwszego roku z Hipolita w Środzie Wielkopolskiej. Zgrani gorzej jak pies z kotem a współpracy jescze gorsi. A jednak udało im się. Aplikacja ta oparta o wiele trudów, łez i załąmań nerwowych wreszczie powstała. Jeśli chodzi o uczniów albo członków tego projektu to ich imiona nie są niczym tajnym więc: Mateusz, Jakub, Kacper, Adrian, drugi Jakub, Oskar, Dariusz, Bartek i Mikołaj. To właśnie dzięki nim możesz teraz wspomóc się informacjami w ... tej aplikacji ? Uhonorujmy ich poświęcenie chwilą ciszy ... o i miłego korzystania ;3\n ",
                                 style: TextStyle(
                                     color: Colors.grey,
-                                    fontSize: 18,
+                                    fontSize: 15,
                                     fontFamily: "Calibri"),
                                 textAlign: TextAlign.left,
                               ),
