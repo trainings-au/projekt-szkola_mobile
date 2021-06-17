@@ -1,18 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:projekt_szkola/Splash%20page.dart';
 
 import 'PageIn.dart';
 import 'PageInfo.dart';
+import 'models.dart';
 
 void main() {
   runApp(
     MaterialApp(
-      home: PageOne(),
+      home: Splashpage(),
     ),
   );
 }
 
 class PageOne extends StatefulWidget {
+  final List<InstructionModel> poprzyjezdzie;
+  final List<InstructionModel> pobyt;
+
+  const PageOne({Key key, this.poprzyjezdzie, this.pobyt}) : super(key: key);
+
   @override
   _PageOneState createState() => _PageOneState();
 }

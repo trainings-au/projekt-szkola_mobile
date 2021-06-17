@@ -4,17 +4,17 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'forMap.dart';
 import 'main.dart';
-
-void main() {
-  runApp(PageIn(
-    items: List<String>.generate(10000, (i) => 'Item $i'),
-  ));
-}
+import 'models.dart';
 
 class PageIn extends StatelessWidget {
-  final List<String> items;
+  final String title;
+  final String description;
+  final String urlToIcon;
+  final List<ContactDetails> models;
 
-  PageIn({Key key, @required this.items}) : super(key: key);
+  const PageIn(
+      {Key key, this.title, this.description, this.urlToIcon, this.models})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class PageIn extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pop(
                         context,
                         MaterialPageRoute(
                           builder: (context) => PageOne(),
@@ -145,11 +145,5 @@ class PageIn extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<String>('items', items));
   }
 }

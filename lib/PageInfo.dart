@@ -19,7 +19,7 @@ class PageInfo extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pop(
                         context,
                         MaterialPageRoute(
                           builder: (context) => PageOne(),
