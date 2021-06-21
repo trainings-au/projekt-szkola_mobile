@@ -1,6 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:projekt_szkola/Splash%20page.dart';
+import 'package:http/http.dart' as http;
 
 import 'PageIn.dart';
 import 'PageInfo.dart';
@@ -9,7 +11,7 @@ import 'models.dart';
 void main() {
   runApp(
     MaterialApp(
-      home: Splashpage(),
+      home: PageOne(),
     ),
   );
 }
@@ -53,11 +55,13 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class _PageOneState extends State<PageOne> with SingleTickerProviderStateMixin {
   TabController _tabController;
+  Future<List<InstructionModel>> instructions;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    instructions = fetchInstructions();
   }
 
   @override
@@ -66,112 +70,147 @@ class _PageOneState extends State<PageOne> with SingleTickerProviderStateMixin {
     _tabController.dispose();
   }
 
+  Future<List<InstructionModel>> fetchInstructions() async {
+    final result = await http.get(
+        Uri.parse('https://project-school-2021.herokuapp.com/instructions'));
+
+    final list = jsonDecode(result.body)
+        .map<InstructionModel>((e) => InstructionModel.fromJson(e))
+        .toList();
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: MyAppBar(),
-        body: TabBarView(
-          controller: _tabController,
-          children: <Widget>[
-            Container(
-              color: Color.fromARGB(7, 5, 5, 1),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    flex: 20,
-                    child: Container(
-                      color: Color.fromARGB(4, 5, 6, 1),
-                      child: ListView(
-                        children: [
-                          SizedBox(
-                            height: 12,
-                          ),
-                          Text(
-                            "Co zrobić ",
-                            style: TextStyle(
-                              color: Colors.indigo,
-                              fontSize: 30,
-                              fontWeight: FontWeight.w900,
-                              fontFamily: "RobotoMono",
+        body: FutureBuilder<List<InstructionModel>>(
+          future: instructions,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Center(
+                child: TextButton(
+                    onPressed: () {
+                      setState(() {
+                        instructions = fetchInstructions();
+                      });
+                    },
+                    child: Text("Problem z siecią, spróbuj ponownie.")),
+              );
+            } else if (snapshot.hasData) {
+              return TabBarView(
+                controller: _tabController,
+                children: <Widget>[
+                  Container(
+                    color: Color.fromARGB(7, 5, 5, 1),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          flex: 20,
+                          child: Container(
+                            color: Color.fromARGB(4, 5, 6, 1),
+                            child: ListView(
+                              children: [
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                Text(
+                                  "Co zrobić ",
+                                  style: TextStyle(
+                                    color: Colors.indigo,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.w900,
+                                    fontFamily: "RobotoMono",
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                Text(
+                                  "po przyjeździe",
+                                  style: TextStyle(
+                                    color: Colors.indigo,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.w900,
+                                    fontFamily: "RobotoMono",
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                ...snapshot.data
+                                    .where((element) =>
+                                        element.type == "after_arrival")
+                                    .map<Widget>((e) => greybutton(e))
+                                    .toList(),
+                              ],
                             ),
-                            textAlign: TextAlign.center,
                           ),
-                          Text(
-                            "po przyjeździe",
-                            style: TextStyle(
-                              color: Colors.indigo,
-                              fontSize: 30,
-                              fontWeight: FontWeight.w900,
-                              fontFamily: "RobotoMono",
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    color: Color.fromARGB(7, 5, 5, 1),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          flex: 8,
+                          child: Container(
+                            color: Color.fromARGB(4, 5, 6, 1),
+                            child: ListView(
+                              children: [
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Text(
+                                  "Pobyt w Polsce",
+                                  style: TextStyle(
+                                    color: Colors.indigo,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.w900,
+                                    fontFamily: "RobotoMono",
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                ...snapshot.data
+                                    .where((element) =>
+                                        element.type == "stay_in_poland")
+                                    .map<Widget>((e) => greybutton(e))
+                                    .toList(),
+                              ],
                             ),
-                            textAlign: TextAlign.center,
                           ),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          greybutton(Icons.badge, "Załatwić Kartę pobytu"),
-                          greybutton(Icons.hotel, "Szukać Hoteli"),
-                          greybutton(Icons.house, "Szukać Mieszkania"),
-                          greybutton(Icons.translate, "Tłumacz POL-RUS"),
-                          greybutton(
-                              Icons.room, "Podstawowe adresy w Poznaniu"),
-                          greybutton(Icons.fiber_pin, "Załatwić pesel"),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
-              ),
-            ),
-            Container(
+              );
+            }
+            return Container(
               color: Color.fromARGB(7, 5, 5, 1),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    flex: 8,
-                    child: Container(
-                      color: Color.fromARGB(4, 5, 6, 1),
-                      child: ListView(
-                        children: [
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Text(
-                            "Pobyt w Polsce",
-                            style: TextStyle(
-                              color: Colors.indigo,
-                              fontSize: 30,
-                              fontWeight: FontWeight.w900,
-                              fontFamily: "RobotoMono",
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          greybutton(Icons.directions_bus,
-                              "Rozkład jazdy autobusu i pociągu"),
-                          greybutton(
-                              Icons.account_balance, "Założyć konto bankowe"),
-                          greybutton(Icons.work, "Szukać Pracy"),
-                          greybutton(Icons.security, "Policja i Dzielnicowy"),
-                          greybutton(Icons.mail, "Adresy Poczty"),
-                          greybutton(Icons.engineering, "Służby Komunalne"),
-                          greybutton(Icons.restaurant_menu,
-                              "Jedzenie, Rozrywka, Kultura"),
-                        ],
-                      ),
-                    ),
+              child: Center(
+                child: SizedBox(
+                  width: 70,
+                  height: 70,
+                  child: CircularProgressIndicator(
+                    backgroundColor: Colors.black26,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                        Color.fromARGB(140, 1, 1, 1)),
+                    strokeWidth: 8,
                   ),
-                ],
+                ),
               ),
-            ),
-          ],
+            );
+          },
         ),
         bottomNavigationBar: TabBar(
           controller: _tabController,
@@ -198,12 +237,10 @@ class _PageOneState extends State<PageOne> with SingleTickerProviderStateMixin {
 }
 
 class greybutton extends StatelessWidget {
-  final IconData icon;
-  final String text;
+  final InstructionModel model;
 
   const greybutton(
-    this.icon,
-    this.text, {
+    this.model, {
     Key key,
   }) : super(key: key);
   @override
@@ -213,13 +250,15 @@ class greybutton extends StatelessWidget {
         height: 60,
         margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
         padding: EdgeInsets.all(8),
-        child: FlatButton(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Row(
             children: [
               Container(
-                child: Icon(
-                  icon,
-                  color: Color.fromARGB(140, 1, 1, 1),
+                child: Image.network(
+                  model.urlToIcon,
+                  width: 25,
+                  height: 25,
                 ),
                 decoration: BoxDecoration(boxShadow: [
                   BoxShadow(
@@ -230,7 +269,7 @@ class greybutton extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  (text),
+                  (model.title),
                   style: TextStyle(
                     color: Color.fromARGB(140, 1, 1, 1),
                   ),
@@ -250,7 +289,11 @@ class greybutton extends StatelessWidget {
       ),
       onPressed: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => PageIn()));
+            context,
+            MaterialPageRoute(
+                builder: (context) => PageIn(
+                      model: model,
+                    )));
       },
     );
   }

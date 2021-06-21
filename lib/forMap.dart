@@ -6,8 +6,8 @@ class MapUtils {
   static Future<void> openMap(double latitude, double longtitude) async {
     String googleUrl =
         "https://www.google.com/maps/search/?api=1&query=$latitude,$longtitude";
-    if (await launch(googleUrl)) {
-    } else {
+    final result = await launch(googleUrl) ?? true;
+    if (!result) {
       throw "Nie można otworzyć mapy";
     }
   }
