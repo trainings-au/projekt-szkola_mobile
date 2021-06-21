@@ -3,24 +3,24 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:projekt_szkola/list_element.dart';
 
-import 'PageIn.dart';
-import 'PageInfo.dart';
+import 'info_page.dart';
 import 'models.dart';
 
 void main() {
   runApp(
     MaterialApp(
-      home: PageOne(),
+      home: MainPage(),
     ),
   );
 }
 
-class PageOne extends StatefulWidget {
+class MainPage extends StatefulWidget {
   final List<InstructionModel> poprzyjezdzie;
   final List<InstructionModel> pobyt;
 
-  const PageOne({Key key, this.poprzyjezdzie, this.pobyt}) : super(key: key);
+  const MainPage({Key key, this.poprzyjezdzie, this.pobyt}) : super(key: key);
 
   @override
   _PageOneState createState() => _PageOneState();
@@ -40,7 +40,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => PageInfo(),
+                builder: (context) => InfoPage(),
               ),
             );
           },
@@ -53,7 +53,8 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(150);
 }
 
-class _PageOneState extends State<PageOne> with SingleTickerProviderStateMixin {
+class _PageOneState extends State<MainPage>
+    with SingleTickerProviderStateMixin {
   TabController _tabController;
   Future<List<InstructionModel>> instructions;
 
@@ -143,7 +144,7 @@ class _PageOneState extends State<PageOne> with SingleTickerProviderStateMixin {
                                 ...snapshot.data
                                     .where((element) =>
                                         element.type == "after_arrival")
-                                    .map<Widget>((e) => greybutton(e))
+                                    .map<Widget>((e) => ListElement(e))
                                     .toList(),
                               ],
                             ),
@@ -183,7 +184,7 @@ class _PageOneState extends State<PageOne> with SingleTickerProviderStateMixin {
                                 ...snapshot.data
                                     .where((element) =>
                                         element.type == "stay_in_poland")
-                                    .map<Widget>((e) => greybutton(e))
+                                    .map<Widget>((e) => ListElement(e))
                                     .toList(),
                               ],
                             ),
@@ -232,69 +233,6 @@ class _PageOneState extends State<PageOne> with SingleTickerProviderStateMixin {
           ],
         ),
       ),
-    );
-  }
-}
-
-class greybutton extends StatelessWidget {
-  final InstructionModel model;
-
-  const greybutton(
-    this.model, {
-    Key key,
-  }) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      child: Container(
-        height: 60,
-        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-        padding: EdgeInsets.all(8),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Row(
-            children: [
-              Container(
-                child: Image.network(
-                  model.urlToIcon,
-                  width: 25,
-                  height: 25,
-                ),
-                decoration: BoxDecoration(boxShadow: [
-                  BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 8,
-                      offset: Offset(4, 8))
-                ]),
-              ),
-              Expanded(
-                child: Text(
-                  (model.title),
-                  style: TextStyle(
-                    color: Color.fromARGB(140, 1, 1, 1),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ],
-          ),
-        ),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(100),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.black12, blurRadius: 8, offset: Offset(4, 8))
-            ]),
-      ),
-      onPressed: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => PageIn(
-                      model: model,
-                    )));
-      },
     );
   }
 }

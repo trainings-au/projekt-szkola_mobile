@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import 'for_map.dart';
 import 'main.dart';
 
-class PageInfo extends StatelessWidget {
+class InfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -22,7 +24,7 @@ class PageInfo extends StatelessWidget {
                       Navigator.pop(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PageOne(),
+                          builder: (context) => MainPage(),
                         ),
                       );
                     },
@@ -41,7 +43,7 @@ class PageInfo extends StatelessWidget {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(30.0),
                               child: Image.network(
-                                  'https://lh3.googleusercontent.com/p/AF1QipOWRfLMw4YaogW9v0rOmX7bV38fdLreF-j8M7eZ=w600-k'),
+                                  'https://powiatsredzki.pl/powiatsredzki/zasoby/images/archiwum/zapraszamy-na-xxi-sesje-rady-powiatu-sredzkiego/zsz.jpg'),
                             ),
                             SizedBox(
                               height: 20,
@@ -66,7 +68,7 @@ class PageInfo extends StatelessWidget {
                           margin:
                               EdgeInsets.symmetric(vertical: 2, horizontal: 2),
                           child: Text(
-                            "International School of Poznan\n ",
+                            "Centrum Kształcenia Zawodowego i Ustawicznego w Środzie Wlkp.\n ",
                             textAlign: TextAlign.left,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -83,9 +85,14 @@ class PageInfo extends StatelessWidget {
                             SizedBox(
                               width: 10,
                             ),
-                            Text('Edmunda Taczanowskiego 18, 60-147 Poznań',
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.blueGrey)),
+                            InkWell(
+                                onTap: () {
+                                  MapUtils.openMap(52.230859, 17.2591753);
+                                },
+                                child: new Text(
+                                    'Ignacego Jana Paderewskiego 27, Środa Wielkopolska',
+                                    style: TextStyle(
+                                        fontSize: 13, color: Colors.blueGrey))),
                           ],
                         ),
                         SizedBox(
@@ -98,56 +105,34 @@ class PageInfo extends StatelessWidget {
                             SizedBox(
                               width: 10,
                             ),
-                            Text('+48 61 646 37 60',
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.blueGrey)),
+                            InkWell(
+                                onTap: () => launch("+48 61 285 38 64"),
+                                child: new Text('+48 61 285 38 64',
+                                    style: TextStyle(
+                                        fontSize: 16, color: Colors.blueGrey))),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.link,
+                              color: Color.fromARGB(140, 1, 1, 1),
+                            ),
+                            SizedBox(width: 8),
+                            InkWell(
+                              child: Text("www.ckziusroda.edu.pl",
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.blueGrey)),
+                              onTap: () => launch("https://ckziusroda.edu.pl"),
+                            ),
                           ],
                         ),
                       ])),
             ],
           ))),
-    );
-  }
-}
-
-class imageload extends StatelessWidget {
-  final double txt;
-  final double txt1;
-  final double txt2;
-  final String image;
-
-  const imageload(
-    this.txt,
-    this.txt1,
-    this.txt2,
-    this.image, {
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final List<Widget> box = [];
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(txt),
-      child: Image.network(
-        (image),
-        width: txt1,
-        height: txt2,
-        loadingBuilder: (BuildContext context, Widget child,
-            ImageChunkEvent loadingProgress) {
-          if (loadingProgress == null) {
-            return child;
-          }
-          return Center(
-            child: CircularProgressIndicator(
-              value: loadingProgress.expectedTotalBytes != null
-                  ? loadingProgress.cumulativeBytesLoaded /
-                      loadingProgress.expectedTotalBytes
-                  : null,
-            ),
-          );
-        },
-      ),
     );
   }
 }

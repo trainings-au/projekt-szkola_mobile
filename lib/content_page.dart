@@ -2,14 +2,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'forMap.dart';
+import 'for_map.dart';
 import 'main.dart';
 import 'models.dart';
 
-class PageIn extends StatelessWidget {
+class ContentPage extends StatelessWidget {
   final InstructionModel model;
 
-  const PageIn({Key key, this.model}) : super(key: key);
+  const ContentPage({Key key, this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class PageIn extends StatelessWidget {
                       Navigator.pop(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PageOne(),
+                          builder: (context) => MainPage(),
                         ),
                       );
                     },

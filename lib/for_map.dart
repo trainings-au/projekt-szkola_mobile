@@ -8,7 +8,7 @@ class MapUtils {
         "https://www.google.com/maps/search/?api=1&query=$latitude,$longtitude";
     final result = await launch(googleUrl) ?? true;
     if (!result) {
-      throw "Nie można otworzyć mapy";
+      throw "Nie można otworzyć mapy.";
     }
   }
 }
