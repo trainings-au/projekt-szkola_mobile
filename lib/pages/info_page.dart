@@ -1,36 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:projekt_szkola/models/for_map.dart';
+import 'package:projekt_szkola/widgets/back_appbar.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'for_map.dart';
-import 'main.dart';
 
 class InfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+          appBar: BackAppBar(),
           backgroundColor: Colors.white,
           body: SingleChildScrollView(
               child: Column(
             children: [
-              Row(
-                children: [
-                  TextButton(
-                    child: Icon(
-                      Icons.arrow_back_sharp,
-                      color: Colors.grey,
-                    ),
-                    onPressed: () {
-                      Navigator.pop(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MainPage(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
               Container(
                   padding: EdgeInsets.all(16.0),
                   child: Column(
@@ -43,7 +25,8 @@ class InfoPage extends StatelessWidget {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(30.0),
                               child: Image.network(
-                                  'https://powiatsredzki.pl/powiatsredzki/zasoby/images/archiwum/zapraszamy-na-xxi-sesje-rady-powiatu-sredzkiego/zsz.jpg'),
+                                'https://ckziusroda.edu.pl/wp-content/uploads/2019/06/banner20_11.gif',
+                              ),
                             ),
                             SizedBox(
                               height: 20,

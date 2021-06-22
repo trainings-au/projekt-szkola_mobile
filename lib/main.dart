@@ -3,10 +3,9 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:projekt_szkola/list_element.dart';
-
-import 'info_page.dart';
-import 'models.dart';
+import 'package:projekt_szkola/models/models.dart';
+import 'package:projekt_szkola/widgets/info_appbar.dart';
+import 'package:projekt_szkola/widgets/list_element.dart';
 
 void main() {
   runApp(
@@ -26,32 +25,8 @@ class MainPage extends StatefulWidget {
   _PageOneState createState() => _PageOneState();
 }
 
-class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        TextButton(
-          child: Icon(
-            Icons.info_outline,
-            color: Colors.grey,
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => InfoPage(),
-              ),
-            );
-          },
-        ),
-      ],
-    );
-  }
-
-  @override
-  Size get preferredSize => Size.fromHeight(150);
-}
+@override
+Size get preferredSize => Size.fromHeight(150);
 
 class _PageOneState extends State<MainPage>
     with SingleTickerProviderStateMixin {
@@ -85,7 +60,7 @@ class _PageOneState extends State<MainPage>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: MyAppBar(),
+        appBar: InfoAppBar(),
         body: FutureBuilder<List<InstructionModel>>(
           future: instructions,
           builder: (context, snapshot) {

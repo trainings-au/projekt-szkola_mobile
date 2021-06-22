@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'content_page.dart';
-import 'models.dart';
+import 'package:projekt_szkola/models/models.dart';
+import 'package:projekt_szkola/pages/content_page.dart';
 
 class ListElement extends StatelessWidget {
   final InstructionModel model;

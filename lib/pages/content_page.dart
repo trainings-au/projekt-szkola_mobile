@@ -1,10 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:projekt_szkola/models/for_map.dart';
+import 'package:projekt_szkola/models/models.dart';
+import 'package:projekt_szkola/widgets/back_appbar.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'for_map.dart';
-import 'main.dart';
-import 'models.dart';
 
 class ContentPage extends StatelessWidget {
   final InstructionModel model;
@@ -15,28 +13,11 @@ class ContentPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: BackAppBar(),
         body: Container(
           color: Color.fromARGB(7, 5, 5, 1),
           child: Column(
             children: [
-              Row(
-                children: [
-                  TextButton(
-                    child: Icon(
-                      Icons.arrow_back_sharp,
-                      color: Colors.grey,
-                    ),
-                    onPressed: () {
-                      Navigator.pop(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MainPage(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Image.network(
