@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projekt_szkola/models/models.dart';
+import 'package:projekt_szkola/models/instruction_model.dart';
 import 'package:projekt_szkola/pages/content_page.dart';
 
 class ListElement extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:projekt_szkola/main.dart';
+import 'package:projekt_szkola/pages/main_page.dart';
 
 class BackAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override

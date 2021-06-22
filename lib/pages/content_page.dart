@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projekt_szkola/models/for_map.dart';
-import 'package:projekt_szkola/models/models.dart';
+import 'package:projekt_szkola/models/instruction_model.dart';
+import 'package:projekt_szkola/utils/map_utils.dart';
 import 'package:projekt_szkola/widgets/back_appbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 

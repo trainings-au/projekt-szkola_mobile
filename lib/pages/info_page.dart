@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projekt_szkola/models/for_map.dart';
+import 'package:projekt_szkola/utils/map_utils.dart';
 import 'package:projekt_szkola/widgets/back_appbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -23,16 +23,14 @@ class InfoPage extends StatelessWidget {
                             child: Column(
                           children: [
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(30.0),
-                              child: Image.network(
-                                'https://ckziusroda.edu.pl/wp-content/uploads/2019/06/banner20_11.gif',
-                              ),
-                            ),
+                                borderRadius: BorderRadius.circular(30.0),
+                                child: Image(
+                                    image:
+                                        AssetImage('assets/baner_szkola.gif'))),
                             SizedBox(
                               height: 20,
                             ),
                             Container(
-                              width: 10000,
                               margin: EdgeInsets.symmetric(
                                   vertical: 2, horizontal: 2),
                               child: Text(
@@ -47,7 +45,6 @@ class InfoPage extends StatelessWidget {
                           ],
                         )),
                         Container(
-                          width: 10000,
                           margin:
                               EdgeInsets.symmetric(vertical: 2, horizontal: 2),
                           child: Text(
