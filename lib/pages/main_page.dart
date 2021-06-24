@@ -163,15 +163,25 @@ class _PageOneState extends State<MainPage>
             return Container(
               color: Color.fromARGB(7, 5, 5, 1),
               child: Center(
-                child: SizedBox(
-                  width: 70,
-                  height: 70,
-                  child: CircularProgressIndicator(
-                    backgroundColor: Colors.black26,
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                        Color.fromARGB(140, 1, 1, 1)),
-                    strokeWidth: 8,
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                        width: 200,
+                        height: 200,
+                        child: Image(
+                            image: AssetImage("assets/IconAplication.png"))),
+                    SizedBox(
+                      width: 70,
+                      height: 70,
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.black26,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                            Color.fromARGB(140, 1, 1, 1)),
+                        strokeWidth: 8,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             );
